@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Expense Tracker
 
-## Getting Started
+Personal expense tracking app with dynamic daily budget. Daily limit recalculates based on remaining budget divided by remaining days in the month.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Simple password auth (localStorage)
+- Quick expense entry with bank-style number input
+- 8 default categories with icons
+- Real-time budget projection (7-day forecast)
+- Visual impact: see how today's spending affects future daily limits
+- PWA ready
+- Light/dark theme (Desert Mirage palette)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 15 • TypeScript • Supabase • Tailwind • shadcn/ui • Recharts • next-pwa
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup
 
-## Learn More
+1. Create Supabase project and run `supabase-schema.sql`
+2. Copy `.env.example` to `.env.local` and add credentials
+3. `npm install && npm run dev`
 
-To learn more about Next.js, take a look at the following resources:
+## Supabase Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Database uses multi-user structure (currently single user: `user_id = 1`). Easy to extend for multiple users later.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
