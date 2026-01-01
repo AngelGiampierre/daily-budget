@@ -53,15 +53,15 @@ export default function Dashboard() {
     }
   };
 
-  // Gastos de hoy
+  // Gastos de hoy (en zona horaria de Perú)
   const getTodayExpenses = () => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayInPeru = today.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
 
     return expenses.filter((e) => {
       const expenseDate = new Date(e.created_at);
-      expenseDate.setHours(0, 0, 0, 0);
-      return expenseDate.getTime() === today.getTime();
+      const expenseDateInPeru = expenseDate.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+      return expenseDateInPeru === todayInPeru;
     });
   };
 
@@ -78,13 +78,13 @@ export default function Dashboard() {
 
     // Si mañana es mes nuevo, la proyección no aplica (mes nuevo = budget resetea)
     if (isNextMonthTomorrow) {
-      // Calcular gastos HASTA AYER (sin incluir hoy)
+      // Calcular gastos HASTA AYER (sin incluir hoy) en zona horaria de Perú
+      const todayInPeru = today.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+
       const pastExpenses = expenses.filter((e) => {
         const expenseDate = new Date(e.created_at);
-        expenseDate.setHours(0, 0, 0, 0);
-        const todayDate = new Date();
-        todayDate.setHours(0, 0, 0, 0);
-        return expenseDate.getTime() < todayDate.getTime();
+        const expenseDateInPeru = expenseDate.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+        return expenseDateInPeru < todayInPeru;
       });
       const pastSpentCents = pastExpenses.reduce((sum, e) => sum + e.amount, 0);
 
@@ -142,12 +142,12 @@ export default function Dashboard() {
     // TODO en centavos primero
     const baselineBudgetCents = Math.floor(monthlyLimit / daysInMonth);
 
+    const todayInPeru = today.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+
     const pastExpenses = expenses.filter((e) => {
       const expenseDate = new Date(e.created_at);
-      expenseDate.setHours(0, 0, 0, 0);
-      const todayDate = new Date();
-      todayDate.setHours(0, 0, 0, 0);
-      return expenseDate.getTime() < todayDate.getTime();
+      const expenseDateInPeru = expenseDate.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+      return expenseDateInPeru < todayInPeru;
     });
     const pastSpentCents = pastExpenses.reduce((sum, e) => sum + e.amount, 0);
 
